@@ -55,3 +55,23 @@ class TaskPlotProvider:
         for i, series in enumerate(self._get_diviations()):
             sns.histplot(series, kde=True, log_scale=True, ax=axes[i])
         return fig
+
+    def __save_graph(self, func: object, name: str, path: str):
+        func().savefig(f"{path}/{name}.png")
+
+    def draw_plots(self, path: str, show_jupyter: bool = True):
+        try:
+            if not show_jupyter:
+                plt.ioff()
+
+            plots_to_draw = {
+                "heatmap": self.get_heatmap,
+                "scatter_kde_grid": self.get_grid,
+                "hists": self.get_hists,
+                "diviations_differences": self.get_diff_diviations,
+            }
+
+            for key, plot in plots_to_draw.items():
+                self.__save_graph(plot, key, path)
+        finally:
+            plt.ion()
