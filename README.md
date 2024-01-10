@@ -1,6 +1,6 @@
 ## DocuSketch-test
 
-Test task to DocuSketch.
+Test assignment for DocuSketch.
 
 Visual analysis is presented in [notebook](Notebook.ipynb).
 
